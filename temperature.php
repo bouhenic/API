@@ -33,7 +33,31 @@
 		}
 		header('Content-Type: application/json');
 		echo json_encode($response, JSON_PRETTY_PRINT);
-    }
+	}
+	
+	function AddProduct()
+	{
+		global $conn;
+		$temp = $_POST["TEMP"];
+		
+		echo $query="INSERT INTO temperature(TEMP) VALUES('".$temp."')";
+		if(mysqli_query($conn, $query))
+		{
+			$response=array(
+				'status' => 1,
+				'status_message' =>'Produit ajoutÈ avec succËs.'
+			);
+		}
+		else
+		{
+			$response=array(
+				'status' => 0,
+				'status_message' =>'ERREUR!.'. mysqli_error($conn)
+			);
+		}
+		header('Content-Type: application/json');
+		echo json_encode($response);
+	}
     
     switch($request_method)
 	{
@@ -55,12 +79,12 @@
 			header("HTTP/1.0 405 Method Not Allowed");
 			break;
 			
-		/*case 'POST':
+		case 'POST':
 			// Ajouter un produit
 			AddProduct();
 			break;
 			
-		case 'PUT':
+		/*case 'PUT':
 			// Modifier un produit
 			$id = intval($_GET["id"]);
 			updateProduct($id);

@@ -3,7 +3,7 @@
 	include("db_connect.php");
 	$request_method = $_SERVER["REQUEST_METHOD"];
 
-	function getTemperature()
+	function getTemperatures()
 	{
 		global $conn;
 		$query = "SELECT * FROM TEMPERATURE";
@@ -45,7 +45,7 @@
 		{
 			$response=array(
 				'status' => 1,
-				'status_message' =>'Produit ajoutÈ avec succËs.'
+				'status_message' =>'Temperature ajoutÈ avec succËs.'
 			);
 		}
 		else
@@ -53,6 +53,57 @@
 			$response=array(
 				'status' => 0,
 				'status_message' =>'ERREUR!.'. mysqli_error($conn)
+			);
+		}
+		header('Content-Type: application/json');
+		echo json_encode($response);
+	}
+
+	function updateTemperature($id)
+	{
+		global $conn;
+		$data = json_decode(file_get_contents("php://input"),true);
+		$name = $data["name"];
+		$description = $data["description"];
+		$price = $data["price"];
+		$category = $data["category"];
+		$created = 'NULL';
+		$modified = date('Y-m-d H:i:s');
+		$query="UPDATE produit SET name='".$name."', description='".$description."', price='".$price."', category_id='".$category."', created='".$created."', modified='".$modified."' WHERE id=".$id;
+		if(mysqli_query($conn, $query))
+		{
+			$response=array(
+				'status' => 1,
+				'status_message' =>'Temperature mis ‡ jour avec succËs.'
+			);
+		}
+		else
+		{
+			$response=array(
+				'status' => 0,
+				'status_message' =>'…chec de la mise ‡ jour de Temperature. '. mysqli_error($conn)
+			);
+		}
+		header('Content-Type: application/json');
+		echo json_encode($response);
+	}
+	
+	function deleteTemperature($id)
+	{
+		global $conn;
+		$query = "DELETE FROM produit WHERE id=".$id;
+		if(mysqli_query($conn, $query))
+		{
+			$response=array(
+				'status' => 1,
+				'status_message' =>'Temperature supprimÈ avec succËs.'
+			);
+		}
+		else
+		{
+			$response=array(
+				'status' => 0,
+				'status_message' =>'La suppression de la Temperature a ÈchouÈ. '. mysqli_error($conn)
 			);
 		}
 		header('Content-Type: application/json');
@@ -71,7 +122,7 @@
 			}
 			else
 			{
-				getTemperature();
+				getTemperatures();
 			}
 			break;
 		default:
@@ -84,7 +135,7 @@
 			AddTemperature();
 			break;
 			
-		/*case 'PUT':
+		case 'PUT':
 			// Modifier un produit
 			$id = intval($_GET["id"]);
 			updateTemperature($id);
@@ -94,6 +145,6 @@
 			// Supprimer un produit
 			$id = intval($_GET["id"]);
 			deleteTemperature($id);
-			break;*/
+			break;
 
 	}

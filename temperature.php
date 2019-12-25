@@ -3,7 +3,7 @@
 	include("db_connect.php");
 	$request_method = $_SERVER["REQUEST_METHOD"];
 
-	function getProducts()
+	function getTemperature()
 	{
 		global $conn;
 		$query = "SELECT * FROM TEMPERATURE";
@@ -17,7 +17,7 @@
 		echo json_encode($response, JSON_PRETTY_PRINT);
     }
     
-    function getProduct($ID=0)
+    function getTemperature($ID=0)
 	{
 		global $conn;
 		$query = "SELECT * FROM TEMPERATURE";
@@ -35,7 +35,7 @@
 		echo json_encode($response, JSON_PRETTY_PRINT);
 	}
 	
-	function AddProduct()
+	function AddTemperature()
 	{
 		global $conn;
 		$temp = $_POST["TEMP"];
@@ -67,11 +67,11 @@
 			if(!empty($_GET["ID"]))
 			{
 				$ID=intval($_GET["ID"]);
-				getProduct($ID);
+				getTemperature($ID);
 			}
 			else
 			{
-				getProducts();
+				getTemperature();
 			}
 			break;
 		default:
@@ -81,19 +81,19 @@
 			
 		case 'POST':
 			// Ajouter un produit
-			AddProduct();
+			AddTemperature();
 			break;
 			
 		/*case 'PUT':
 			// Modifier un produit
 			$id = intval($_GET["id"]);
-			updateProduct($id);
+			updateTemperature($id);
 			break;
 			
 		case 'DELETE':
 			// Supprimer un produit
 			$id = intval($_GET["id"]);
-			deleteProduct($id);
+			deleteTemperature($id);
 			break;*/
 
 	}

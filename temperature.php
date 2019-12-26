@@ -45,65 +45,60 @@
 		{
 			$response=array(
 				'status' => 1,
-				'status_message' =>'Temperature ajoutÈ avec succËs.'
+				'status_message' =>'Temperature added with success.'
 			);
 		}
 		else
 		{
 			$response=array(
 				'status' => 0,
-				'status_message' =>'ERREUR!.'. mysqli_error($conn)
+				'status_message' =>'ERROR!.'. mysqli_error($conn)
 			);
 		}
 		header('Content-Type: application/json');
 		echo json_encode($response);
 	}
 
-	function updateTemperature($id)
+	function updateTemperature($ID)
 	{
 		global $conn;
 		$data = json_decode(file_get_contents("php://input"),true);
-		$name = $data["name"];
-		$description = $data["description"];
-		$price = $data["price"];
-		$category = $data["category"];
-		$created = 'NULL';
-		$modified = date('Y-m-d H:i:s');
-		$query="UPDATE produit SET name='".$name."', description='".$description."', price='".$price."', category_id='".$category."', created='".$created."', modified='".$modified."' WHERE id=".$id;
+		$temp = $data["temp"];
+		$query="UPDATE TEMPERATURE SET TEMP='".$temp."' WHERE id=".$ID;
 		if(mysqli_query($conn, $query))
 		{
 			$response=array(
 				'status' => 1,
-				'status_message' =>'Temperature mis ‡ jour avec succËs.'
+				'status_message' =>'Temperature updated with success.'
 			);
 		}
 		else
 		{
 			$response=array(
 				'status' => 0,
-				'status_message' =>'…chec de la mise ‡ jour de Temperature. '. mysqli_error($conn)
+				'status_message' =>'Failure with the temperature update'. mysqli_error($conn)
 			);
 		}
 		header('Content-Type: application/json');
 		echo json_encode($response);
 	}
 	
-	function deleteTemperature($id)
+	function deleteTemperature($ID)
 	{
 		global $conn;
-		$query = "DELETE FROM produit WHERE id=".$id;
+		$query = "DELETE FROM TEMPERATURE WHERE id=".$ID;
 		if(mysqli_query($conn, $query))
 		{
 			$response=array(
 				'status' => 1,
-				'status_message' =>'Temperature supprimÈ avec succËs.'
+				'status_message' =>'Temperature deleted with success.'
 			);
 		}
 		else
 		{
 			$response=array(
 				'status' => 0,
-				'status_message' =>'La suppression de la Temperature a ÈchouÈ. '. mysqli_error($conn)
+				'status_message' =>'Failure with the suppression '. mysqli_error($conn)
 			);
 		}
 		header('Content-Type: application/json');
@@ -137,13 +132,13 @@
 			
 		case 'PUT':
 			// Modifier un produit
-			$id = intval($_GET["id"]);
+			$id = intval($_GET["ID"]);
 			updateTemperature($id);
 			break;
 			
 		case 'DELETE':
 			// Supprimer un produit
-			$id = intval($_GET["id"]);
+			$id = intval($_GET["ID"]);
 			deleteTemperature($id);
 			break;
 

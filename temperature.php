@@ -132,14 +132,14 @@
 			
 		case 'PUT':
 			// Modifier un produit
-			$id = intval($_GET["ID"]);
-			updateTemperature($id);
+			$ID = intval($_GET["ID"]);
+			updateTemperature($ID);
 			break;
 			
 		case 'DELETE':
 			// Supprimer un produit
-			$id = intval($_GET["ID"]);
-			deleteTemperature($id);
+			$ID = intval($_GET["ID"]);
+			deleteTemperature($ID);
 			break;
 
 	}

@@ -7,15 +7,13 @@
 
 - .htaccess: Ce fichier est utilisé pour le routage.
 
-
-
-Route                   Méthode     Type          Description
-API/temperature         GET	        JSON	        Récupérer toute la table temperature.
-API/temperature/{id}	  GET	        JSON	        Récupérer les données d’un seul enregistrement température
-API/temperature	        POST	      JSON	        Insérer une nouvelle mesure dans la base de données.
-API/temperature	        PUT	        JSON	        Mettre à jour un enregistrement dans la base de données.
-API/temperature	        DELETE	    JSON	        Supprimer un enregistrement dans la base de données.
-
+| Route        | Méthode    |  Type     | Description|
+| :------------- | :----------: | -----------: |-----------: |
+|  API/temperature | GET   | JSON    |Récupérer toute la table temperature.|
+| API/temperature/{id}   | GET | JSON |Récupérer les données d’un seul enregistrement température |
+|  API/temperature | POST   | JSON    |Insérer une nouvelle mesure dans la base de données.|
+| API/temperature/{id}   | PUT | JSON |Mettre à jour un enregistrement dans la base de données. |
+| API/temperature/{id}   | DELETE | JSON |Supprimer un enregistrement dans la base de données. |
 
 Requête GET de toute la table temperature : curl http://localhost:8888/API/temperature
 

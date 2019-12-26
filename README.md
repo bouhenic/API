@@ -1,6 +1,6 @@
 # API REST 
 
-![left](logo.png)
+![left](logo.png)<b>BTS SNIR LYCEE NEWTON</b>
 
 - db_connect.php: Ce fichier utilisera la chaîne de connexion mysql.
 

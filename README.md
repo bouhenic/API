@@ -1,5 +1,6 @@
-# API REST
+# API REST 
 
+![left](logo.png)
 
 - db_connect.php: Ce fichier utilisera la chaîne de connexion mysql.
 

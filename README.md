@@ -4,7 +4,7 @@
 
 - db_connect.php: Ce fichier utilisera la chaîne de connexion mysql.
 
-- temperature.php: Ce fichier contient tous les méthode d’API REST.
+- temperature.php: Ce fichier contient toutes les méthodes d’API REST.
 
 - .htaccess: Ce fichier est utilisé pour le routage.
 
